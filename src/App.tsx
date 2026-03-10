@@ -1,34 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import Home from './components/Home/Home'
+import { Contacto } from './components/Contact/Contact'
+import NotFound from './components/404/NotFound'
+
 import './App.css'
 
+
+
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+    {/* 1. La Navbar (Siempre visible) */}
+      <nav className="p-4 bg-indigo-600 text-white flex gap-4 shadow-lg">
+        <Link to="/" className="hover:underline font-bold">Inicio</Link>
+        <Link to="/contacto" className="hover:underline font-bold">Contacto</Link>
+      </nav>
+
+    {/* 2. El Área de Contenido (Aquí cambian los componentes) */}
+    <div className='p-10'>
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/contacto' element={<Contacto />}></Route>
+        {/* 404 - Si no encuentra la ruta */}
+        <Route path='*' element={<NotFound></NotFound>}></Route>
+      </Routes>
+    </div>
+
+    </BrowserRouter>
   )
 }
 
